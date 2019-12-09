@@ -291,3 +291,19 @@ function breakingRecords(scores) {
 
 breakingRecords([10,5,20,20,4,5,2,25,1]);
 
+//Birthday Chocolate
+function birthday(s, d, m) {
+    let n = s.length;
+    let results = [];
+    for(let i = 0; i < n;i++){
+        let newArr = s.slice(i,i+m);
+        let chocoSum = 0;
+        newArr.forEach((element) => chocoSum += element);
+        if(chocoSum === d){
+            results.push(newArr);
+        }
+    }
+    return results.length;
+}
+
+birthday([1,2,1,3,2],3,2);
