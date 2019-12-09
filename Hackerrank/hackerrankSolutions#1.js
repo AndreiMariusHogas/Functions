@@ -224,3 +224,36 @@ function kangaroo(x1, v1, x2, v2) {
 }
 
 kangaroo(0,3,4,2);
+
+//Between Two Sets
+function getTotalX(a, b) {
+    let n=a.length;
+    let m=b.length;
+    let totalLength = n * m;
+    let betweenNums = [];
+    let resultsArr = [];
+    let finals = 0;
+    for(let i=a[n-1]; i <= b[0];i++){
+        betweenNums.push(i);
+    }
+    betweenNums.forEach((num) => {
+        for(let i=0; i < n;i++){
+            for (let j=0; j< m;j++){
+                if(num % a[i] === 0 && b[j] % num === 0){
+                    resultsArr.push(num);
+                }
+                
+            }   
+            
+        }
+    })
+    function repeatX(arr,value){
+        let times = 0;
+        arr.forEach((element) => (element === value && count ++));
+        return times;
+    }
+
+}
+
+getTotalX([2,6],[24,36]);
+getTotalX([2,4],[16,32,96]);
