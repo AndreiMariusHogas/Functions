@@ -203,6 +203,21 @@ function kangaroo(x1, v1, x2, v2) {
     if(x2>x1 && v2>v1){
         return false;
     }else{
-        
+        let distancek1 = x1 + v1;
+        let distancek2 = x2 + v2;
+        while(distancek1 < distancek2){
+            distancek1 += v1;
+            distancek2 += v2;
+        }
+        console.log(distancek1);
+        console.log(distancek2);
+        if(distancek1 == distancek2){
+            return "YES";
+        }
+        else{
+            return "NO";
+        }
     }
 }
+
+kangaroo(0,3,4,2);
