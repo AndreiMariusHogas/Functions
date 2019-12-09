@@ -249,11 +249,45 @@ function getTotalX(a, b) {
     })
     function repeatX(arr,value){
         let times = 0;
-        arr.forEach((element) => (element === value && count ++));
+        arr.forEach((element) => (element === value && times ++));
         return times;
     }
-
+    for(let i=0;i<resultsArr.length;i++){
+        let count = repeatX(resultsArr,resultsArr[i]);
+        if(count === totalLength){
+            finals+=1;
+        }
+    }
+    
+    return finals/totalLength;
 }
 
 getTotalX([2,6],[24,36]);
 getTotalX([2,4],[16,32,96]);
+
+//Breaking the Records
+
+function breakingRecords(scores) {
+    let min = scores[0];
+    let max = scores[0];
+    let minBreaks = 0;
+    let maxBreaks = 0;
+    let n=scores.length;
+    let finalArr = [];
+    for(let i=1;i<n;i++){
+        if(scores[i] < min){
+            min = scores[i];
+            minBreaks += 1;
+        }else if(scores[i] > max){
+            max = scores[i];
+            maxBreaks +=1;
+        }
+    }
+    finalArr.push(maxBreaks);
+    finalArr.push(minBreaks);
+    return finalArr;
+
+}
+
+breakingRecords([10,5,20,20,4,5,2,25,1]);
+
