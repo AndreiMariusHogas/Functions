@@ -201,8 +201,11 @@ countApplesAndOranges(7,10,4,12,[2,3,-4],[3,-2,-4]);
 //Kangaroo Jump 
 function kangaroo(x1, v1, x2, v2) {
     if(x2>x1 && v2>v1){
-        return false;
-    }else{
+        return "NO";
+    }else if(x1< x2 && v1 == v2){
+        return "NO";
+    }
+    else{
         let distancek1 = x1 + v1;
         let distancek2 = x2 + v2;
         while(distancek1 < distancek2){
