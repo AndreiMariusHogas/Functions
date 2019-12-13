@@ -340,6 +340,45 @@ function migratoryBirds(arr) {
         countArr.push(howMany(arr,i));
     }
     let seen = Math.max(...countArr);
-    console.log(seen);
+    for(let i=0;i<=5;i++){
+        if(countArr[i] === seen){
+            return i+1;
+        }
+    }
 }
 migratoryBirds([1,2,3,4,5,4,3,2,1,3,4]);
+//Failed twice because i wrote too many functions
+//Managed to optimize so it doesn't loop through an immense array
+//The 1,2,3,4,5 type limitation was my hint to understand the timeout error
+//Loop and count the occurence of just numbers 1 to 5 without looping through the entire array
+//Remember An Array starts at 0 even if you loop from 1
+
+//Day of the Programmer
+//Create if statement before after and equal to 1918
+//if prior to 1918 & divsible by 4 = Julian Leap Year
+//after 1918 divisible by 400 || (4 but not 100)  
+
+function dayOfProgrammer(year) {
+    let celebrationDay = '';
+    if(year<1918){
+        if(year % 4 === 0){
+            return celebrationDay = '12.09.'+year;
+        }else{
+            return celebrationDay = '13.09.'+year;
+        }
+    }else if(year === 1918){
+            return celebrationDay = '26.09.'+year;
+    }else{
+        if((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0){
+            return celebrationDay = '12.09.'+year;
+        }else{
+            return celebrationDay = '13.09.'+year;
+        }
+    }
+
+}
+
+dayOfProgrammer(1918);
+dayOfProgrammer(2017);
+dayOfProgrammer(1884);
+dayOfProgrammer(1873);
