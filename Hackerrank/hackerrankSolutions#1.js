@@ -490,7 +490,6 @@ function countingValleys(n, s) {
         else{
             height --;
         }
-        console.log(height);
         if(height<0 && isValley === false){
             valleyCount ++;
             isValley = true;
@@ -502,3 +501,27 @@ function countingValleys(n, s) {
    
 }
 countingValleys(8,'DDUUDDUDUUUD');
+
+//Electronics Shop
+//Loop Through both array and push value pairs onto new array 
+//Push Price into a price array
+//Check for Biggest value in Price Array
+
+
+function getMoneySpent(keyboards, drives, b) {
+    let combinedPrice = [];
+    keyboards.forEach((keyboard) => {
+        drives.forEach((drive) => {
+            if(keyboard+drive <= b){
+                combinedPrice.push(keyboard+drive);
+            }
+        })
+    })
+    if(buyArr.length === 0){
+        return -1;
+    }else{
+        return Math.max(...combinedPrice);
+
+    }
+}
+getMoneySpent([3,1],[5,2,8],10);
