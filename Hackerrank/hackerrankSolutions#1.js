@@ -382,3 +382,18 @@ dayOfProgrammer(1918);
 dayOfProgrammer(2017);
 dayOfProgrammer(1884);
 dayOfProgrammer(1873);
+
+//Bon Appétit
+//Loop Through Array 
+//Calculate Bill Value 
+//Remove k item form the sum and divide it by  2
+//Compare to b 
+//return result 
+
+function bonAppetit(bill, k, b) {
+    let totalBill = bill.reduce((a,b) => a + b, 0) - bill[k];
+    console.log(totalBill);
+}
+
+bonAppetit([3,10,2,9],1,7);
+bonAppetit([3,10,2,9],1,12);
