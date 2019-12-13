@@ -389,11 +389,85 @@ dayOfProgrammer(1873);
 //Remove k item form the sum and divide it by  2
 //Compare to b 
 //return result 
+//Error on big array
+//Simplify the Average Array Sum 
 
 function bonAppetit(bill, k, b) {
     let totalBill = bill.reduce((a,b) => a + b, 0) - bill[k];
-    console.log(totalBill);
+    let compare =  b - totalBill/2;
+    if(compare === 0){
+        console.log('Bon Appetit');
+    }else{
+        console.log(compare);
+    }
 }
 
 bonAppetit([3,10,2,9],1,7);
 bonAppetit([3,10,2,9],1,12);
+
+//Sock Merchant
+//Loop Through Array 
+//Filter Array of Unique Values 
+//Check occurences of each unique element in given Array
+//Check if number of occurences is divisible by 2 
+//If yes add number/2 to total pairs
+//if no add (num-1)/2 to total pairs
+
+function sockMerchant(n, ar) {
+    function extractUnique(value, index, self){
+        return self.indexOf(value) === index;
+    }
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((bird) => (bird === value && count++));
+        return count;
+    }
+    let uniqueArr = ar.filter(extractUnique);
+    let resultsArr = [];
+    let totalPairs = 0;
+    uniqueArr.forEach((num) => resultsArr.push(howMany(ar,num)));
+    resultsArr.forEach((num) => {
+        if(num >= 2 && num % 2 === 0){
+            totalPairs += num/2;
+        }else{
+            totalPairs += (num-1)/2;
+        }
+    })
+    return totalPairs;
+}
+
+sockMerchant(9,[10,20,20,10,10,30,50,10,20]);
+
+//Drawing Book 
+//n-length of book 
+//p-page index 
+//You can see 2 pages of the book everytime you turn except first and last
+//Check if there's more than 2 pages 
+//Check what is the minimum amount of pages to turn  from 0 or n 
+//return the result 
+
+function pageCount(n, p) {
+    let pagesArr = [];
+    for(let i=0;i<=n;i++){
+        pagesArr.push(i);
+    }
+    if(n<=2){
+        return 0;
+    }
+    for(let i=0;i<pagesArr.length;i++){
+        if(pagesArr[i] === p){
+            if(i < n-i){
+                return Math.floor(i/2);
+            }else{
+                if(n%2===0 && n-p <= 1){
+                    return Math.floor(((n-i)+1)/2);
+                }
+                return Math.floor((n-i)/2);
+            }
+        }
+    }
+}
+
+pageCount(5,4);
+pageCount(9,7);
+pageCount(6,5);
