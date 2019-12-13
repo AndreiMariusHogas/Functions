@@ -517,7 +517,7 @@ function getMoneySpent(keyboards, drives, b) {
             }
         })
     })
-    if(buyArr.length === 0){
+    if(combinedPrice.length === 0){
         return -1;
     }else{
         return Math.max(...combinedPrice);
@@ -525,3 +525,23 @@ function getMoneySpent(keyboards, drives, b) {
     }
 }
 getMoneySpent([3,1],[5,2,8],10);
+
+//Cats and a Mouse
+//Calculate distance from mouse to cat
+//Make it absolute in case z<y || z<x
+//compare
+
+function catAndMouse(x, y, z) {
+    const distanceCatA = Math.abs(z-x);
+    const distanceCatB = Math.abs(z-y);
+    if(distanceCatA === distanceCatB){
+        return "Mouse C";
+    }else if(distanceCatA < distanceCatB){
+        return "Cat A";
+    }else{
+        return "Cat B";
+    }
+
+}
+catAndMouse(1,2,3);
+catAndMouse(1,3,2);
