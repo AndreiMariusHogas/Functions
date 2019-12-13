@@ -471,3 +471,34 @@ function pageCount(n, p) {
 pageCount(5,4);
 pageCount(9,7);
 pageCount(6,5);
+
+//Counting Valleys
+//Split String into Array 
+//Check height 
+//check if is valley
+//conditionals if/else for step to track height
+//return count 
+function countingValleys(n, s) {
+    let guideArr = s.split('');
+    let height = 0;
+    let isValley = false;
+    let valleyCount = 0;
+    guideArr.forEach((step)=>{
+        if(step === "U"){
+            height ++;
+        }
+        else{
+            height --;
+        }
+        console.log(height);
+        if(height<0 && isValley === false){
+            valleyCount ++;
+            isValley = true;
+        }else if( height >= 0){
+            isValley = false;
+        }
+    })
+    return valleyCount;
+   
+}
+countingValleys(8,'DDUUDDUDUUUD');
