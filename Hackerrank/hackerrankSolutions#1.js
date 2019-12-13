@@ -37,7 +37,7 @@ function diagonalDifference(arr) {
     let x=arr.length;
     for(let i=0;i<x;i++){
         ltrsum += arr[i][i];
-        for(let j=0<x;j++){
+        for(let j=0;j<x;j++){
             if(i+j === x-1){
                 rtlsum+= arr[i][j];
             }
@@ -545,3 +545,39 @@ function catAndMouse(x, y, z) {
 }
 catAndMouse(1,2,3);
 catAndMouse(1,3,2);
+
+//Forming a Magic Square
+//Divide the Array into rows
+//Divide the Array into columns
+//Divide the Array  into diagonals 
+//Compare results of each sum 
+function formingMagicSquare(s) {
+    const n=s.length;
+    let flatArr = [];
+    let compare = [];
+    let difference = 0;
+    const possible = [
+        [8, 1, 6, 3, 5, 7, 4, 9, 2],
+        [6, 1, 8, 7, 5, 3, 2, 9, 4],
+        [4, 9, 2, 3, 5, 7, 8, 1, 6],
+        [2, 9, 4, 7, 5, 3, 6, 1, 8],
+        [8, 3, 4, 1, 5, 9, 6, 7, 2],
+        [4, 3, 8, 9, 5, 1, 2, 7, 6],
+        [6, 7, 2, 1, 5, 9, 8, 3, 4],
+        [2, 7, 6, 9, 5, 1, 4, 3, 8]
+    ];
+    s.forEach((arr) => arr.forEach((element) => flatArr.push(element)));
+    flatArr.forEach((element) => {
+        possible.forEach((arr) => {
+            arr.forEach((innerelem) => {
+                if(element !== innerelem){
+                    difference += Math.abs(element-innerelem);
+                }
+            })
+            compare.push(difference);
+            difference = 0;
+        })
+    })
+    console.log(compare);
+}
+formingMagicSquare([[4,9,2],[3,5,7],[8,1,5]]);
