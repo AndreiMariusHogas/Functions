@@ -585,10 +585,12 @@ formingMagicSquare([[4,9,2],[3,5,7],[8,1,5]]);
 
 //Picking Numbers
 //loop trough array
-//each time difference is 1 or less add 1 to count
-//-1 Because num-num will allways add 1 to count
-//Push to compare arr the count
-//Check the max in compare arr
+//if elem-elem2 <= 1 and they're not equal. Count how many times a is in array, and b is in array
+//add them up and push for comparison
+//check highest number of pair values
+//Error for case when a[i] === a[i]
+//Added safety net for a[i] === a[j]
+//Works!
 function pickingNumbers(a) {
     let n=a.length;
     let count = 0;
@@ -602,10 +604,12 @@ function pickingNumbers(a) {
         for(let j = 0;j < n;j++){
             if(Math.abs(a[i]-a[j]) <= 1 && a[i] !== a[j]){
                 compare.push(howMany(a,a[i])+howMany(a,a[j]));
+            }else if(Math.abs(a[i]-a[j]) <= 1 && a[i] === a[j]){
+                compare.push(howMany(a,a[i]));
             }
         }
     }
-    console.log(compare);
+    return Math.max(...compare);
 
 }
 pickingNumbers([1,2,2,3,1,2]);
@@ -613,5 +617,25 @@ pickingNumbers([4,6,5,3,3,1]);
 pickingNumbers([4, 2, 3, 4, 4, 9, 98, 98, 3 ,3 ,3 ,4, 2, 98, 1,
      98, 98, 1, 1, 4, 98, 2, 98, 3, 9, 9, 3, 1, 4, 1, 98, 9, 9 ,
      2, 9, 4, 2, 2, 9 ,98, 4 ,98 ,1, 3 ,4 ,9 ,1 ,98 ,98 ,4 ,2 ,
-     3 ,98 ,98 ,1 ,99 ,9 ,98 ,98 ,3 ,98 ,98, 4 ,98 ,2 ,98 ,4 ,2 ,1 ,1 ,9 ,2 ,4])
+     3 ,98 ,98 ,1 ,99 ,9 ,98 ,98 ,3 ,98 ,98, 4 ,98 ,2 ,98 ,4 ,2 ,1 ,1 ,9 ,2 ,4]);
 
+//Climbing the Leaderboard
+//Loop through alice's scores
+//insert score into array and sort it
+//check where gamescore is and return indexof
+
+function climbingLeaderboard(scores, alice) {
+    let orderArr = []; 
+    let resultsArr= [];
+    alice.forEach((gameScore)=>{
+        let arrCopy = [...scores];
+        arrCopy.push(gameScore);
+        orderArr.push(arrCopy.sort((a,b)=> b-a));
+    })
+    for(let i=0;i<orderArr.length;i++){
+        
+
+    }
+    console.log(resultsArr);
+}
+climbingLeaderboard([100,90,90,80,75,60].indexOf(80),[50,65,77,90,102])
