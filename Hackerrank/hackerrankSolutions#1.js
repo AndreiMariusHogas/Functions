@@ -547,10 +547,13 @@ catAndMouse(1,2,3);
 catAndMouse(1,3,2);
 
 //Forming a Magic Square
-//Divide the Array into rows
-//Divide the Array into columns
-//Divide the Array  into diagonals 
-//Compare results of each sum 
+//Failed miserably
+//Taken into consideration that the matrix is 3x3. How many possibilities are there? 
+//Found list of possibilities online
+//Loop through possibilities
+//Check for the smallest amount of changes u can make
+//Push results into an array
+//Check for the smallest difference in the array
 function formingMagicSquare(s) {
     const n=s.length;
     let flatArr = [];
@@ -567,17 +570,48 @@ function formingMagicSquare(s) {
         [2, 7, 6, 9, 5, 1, 4, 3, 8]
     ];
     s.forEach((arr) => arr.forEach((element) => flatArr.push(element)));
-    flatArr.forEach((element) => {
-        possible.forEach((arr) => {
-            arr.forEach((innerelem) => {
-                if(element !== innerelem){
-                    difference += Math.abs(element-innerelem);
-                }
-            })
-            compare.push(difference);
-            difference = 0;
-        })
+    possible.forEach((arr) => {
+        for (let i = 0;i<arr.length;i++){
+            if(flatArr[i] !== arr[i]){
+                difference += (Math.abs(flatArr[i]-arr[i]));
+            }
+        }
+        compare.push(difference);
+        difference = 0;
     })
-    console.log(compare);
+    return Math.min(...compare);
 }
 formingMagicSquare([[4,9,2],[3,5,7],[8,1,5]]);
+
+//Picking Numbers
+//loop trough array
+//each time difference is 1 or less add 1 to count
+//-1 Because num-num will allways add 1 to count
+//Push to compare arr the count
+//Check the max in compare arr
+function pickingNumbers(a) {
+    let n=a.length;
+    let count = 0;
+    let compare = []
+    function howMany(arr,value){
+        let count = 0
+        a.forEach((elem) => (elem === value && count++));
+        return count;
+    }
+    for(let i = 0;i<n;i++){
+        for(let j = 0;j < n;j++){
+            if(Math.abs(a[i]-a[j]) <= 1 && a[i] !== a[j]){
+                compare.push(howMany(a,a[i])+howMany(a,a[j]));
+            }
+        }
+    }
+    console.log(compare);
+
+}
+pickingNumbers([1,2,2,3,1,2]);
+pickingNumbers([4,6,5,3,3,1]);
+pickingNumbers([4, 2, 3, 4, 4, 9, 98, 98, 3 ,3 ,3 ,4, 2, 98, 1,
+     98, 98, 1, 1, 4, 98, 2, 98, 3, 9, 9, 3, 1, 4, 1, 98, 9, 9 ,
+     2, 9, 4, 2, 2, 9 ,98, 4 ,98 ,1, 3 ,4 ,9 ,1 ,98 ,98 ,4 ,2 ,
+     3 ,98 ,98 ,1 ,99 ,9 ,98 ,98 ,3 ,98 ,98, 4 ,98 ,2 ,98 ,4 ,2 ,1 ,1 ,9 ,2 ,4])
+
