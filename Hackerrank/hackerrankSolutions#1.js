@@ -622,20 +622,113 @@ pickingNumbers([4, 2, 3, 4, 4, 9, 98, 98, 3 ,3 ,3 ,4, 2, 98, 1,
 //Climbing the Leaderboard
 //Loop through alice's scores
 //insert score into array and sort it
+//Remove duplicates
 //check where gamescore is and return indexof
+//This is the first version. Works but takes too much
+//Need to Simplify
 
 function climbingLeaderboard(scores, alice) {
     let orderArr = []; 
     let resultsArr= [];
     alice.forEach((gameScore)=>{
         let arrCopy = [...scores];
+        let tempArr = [];
         arrCopy.push(gameScore);
-        orderArr.push(arrCopy.sort((a,b)=> b-a));
+        arrCopy.forEach((element)=>{
+            let firstIndex = arrCopy.indexOf(element);
+            let secondIndex = arrCopy.indexOf(element,(firstIndex + 1));
+            if (secondIndex === -1){
+                tempArr.push(element);
+            }else if(secondIndex !== -1){
+                if(!tempArr.includes(element)){
+                    tempArr.push(element);
+                }
+            }
+        })
+
+        orderArr.push(tempArr.sort((a,b)=> b-a));
     })
     for(let i=0;i<orderArr.length;i++){
-        
-
+        resultsArr.push(orderArr[i].indexOf(alice[i])+1);
     }
-    console.log(resultsArr);
+    return resultsArr;    
 }
-climbingLeaderboard([100,90,90,80,75,60].indexOf(80),[50,65,77,90,102])
+climbingLeaderboard([100,90,90,80,75,60],[50,65,77,90,102])
+
+//How to Improve it? 
+//sort the array before the loop
+//Simplify Syntax
+//use instead of copying the temparr
+//check Runtime
+//Still 4 cases timeout
+//Create funciton to check where insert should happen
+//return results of the function into an arr
+//Observation: This actually seems longer
+//Still 4 cases timed out
+//Further research needed
+function climbingLeaderboard(scores, alice) {
+    let resultsArr= [];
+    let tempArr=[];
+    scores.forEach((score)=>{
+        let firstIndex = scores.indexOf(score);
+            let secondIndex = scores.indexOf(score,(firstIndex + 1));
+            if (secondIndex === -1){
+                tempArr.push(score);
+            }else if(secondIndex !== -1){
+                if(!tempArr.includes(score)){
+                    tempArr.push(score);
+                }
+        }
+    }) 
+    tempArr.sort((a,b)=>b-a);
+    function getIndexToIns(arr, num) {
+        for (let i=0;i<=arr.length;i++){
+            if(arr[i] <= num){
+                return i;
+            } 
+        }
+        return arr.length;
+    }
+    alice.forEach((gameScore) => resultsArr.push(getIndexToIns(tempArr,gameScore) +1));
+    return resultsArr;    
+}
+climbingLeaderboard([100,90,90,80,75,60],[50,65,77,90,102])
+
+//Improvement step 3
+//Went down from 11 cases to 4. 
+//Timeout error
+//Wrote a function to extract uniques from Array
+//This might Simplify. doesn't look much simpler
+//Removed the sort. I don't know why i sorted it in the first place
+//Simplified it so it starts from the last known index
+//This was the hint in the discussion board
+
+
+function climbingLeaderboard(scores, alice) {
+    let resultsArr= [];
+    function extractUnique(arr){
+        return arr.filter((item,pos,array) => {
+            return !pos || item !== array[pos-1];
+        })
+    }
+    let tempArr = extractUnique(scores);
+    console.log(tempArr);
+    let indexToStart = tempArr.length;
+    function getIndexToIns(arr, num,indexToStart) {
+        for (let i=indexToStart;i>=0;i--){
+            if(arr[i] >= num){
+                return i;
+            }
+        }
+        return 0;
+    }
+    alice.forEach((gameScore) =>{
+        let lastValue = getIndexToIns(tempArr,gameScore,indexToStart);
+        resultsArr.push(lastValue);
+        indexToStart = lastValue;
+    })
+    
+    return resultsArr;    
+}
+climbingLeaderboard([100,90,90,80,75,60],[50,65,77,90,102]);
+climbingLeaderboard([100,100,50,40,40,20,10],[5,25,50,120]);
