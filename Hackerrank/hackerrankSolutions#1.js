@@ -702,7 +702,7 @@ climbingLeaderboard([100,90,90,80,75,60],[50,65,77,90,102])
 //Removed the sort. I don't know why i sorted it in the first place
 //Simplified it so it starts from the last known index
 //This was the hint in the discussion board
-
+//This worked! Final 4 cases Solved
 
 function climbingLeaderboard(scores, alice) {
     let resultsArr= [];
@@ -716,7 +716,9 @@ function climbingLeaderboard(scores, alice) {
     let indexToStart = tempArr.length;
     function getIndexToIns(arr, num,indexToStart) {
         for (let i=indexToStart;i>=0;i--){
-            if(arr[i] >= num){
+            if(arr[i] > num){
+                return i+1;
+            }else if(arr[i] === num){
                 return i;
             }
         }
@@ -724,7 +726,7 @@ function climbingLeaderboard(scores, alice) {
     }
     alice.forEach((gameScore) =>{
         let lastValue = getIndexToIns(tempArr,gameScore,indexToStart);
-        resultsArr.push(lastValue);
+        resultsArr.push(lastValue + 1);
         indexToStart = lastValue;
     })
     
@@ -732,3 +734,19 @@ function climbingLeaderboard(scores, alice) {
 }
 climbingLeaderboard([100,90,90,80,75,60],[50,65,77,90,102]);
 climbingLeaderboard([100,100,50,40,40,20,10],[5,25,50,120]);
+
+
+//The Hurdle Race
+//get maximum heigh of hurdles
+//Check if potion is needed
+//deduct characther jump ability
+
+function hurdleRace(k, height) {
+    const highest = Math.max(...height);
+    if(k>highest){
+        return 0;
+    }else{
+        return highest -k;
+    }
+}
+hurdleRace(4,[1,6,3,5,2]);
