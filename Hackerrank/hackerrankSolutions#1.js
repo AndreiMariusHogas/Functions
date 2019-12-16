@@ -750,3 +750,44 @@ function hurdleRace(k, height) {
     }
 }
 hurdleRace(4,[1,6,3,5,2]);
+
+//Designer PDF Viewer
+//Split word into array
+//generate alphabet arr
+//find index of wordletter into alphabet
+//extract values at index of wordletter in height arr
+//extract max 
+// multiply with word length
+//return result
+
+function designerPdfViewer(h, word) {
+    let n = word.length;
+    let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    let compare = word.split('');
+    let indexArr = [];
+    let wordHeightArr = [];
+    compare.forEach((letter)=> {
+        alphabet.forEach((alphletter) =>{
+            if(letter === alphletter){
+                indexArr.push(alphabet.indexOf(alphletter));
+            }
+        })
+    })
+    indexArr.forEach((index) => wordHeightArr.push(h[index]));
+    return (Math.max(...wordHeightArr) )* n;
+}
+designerPdfViewer([1,3,1,3,1,4,1,3,2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,7],'zaba');
+
+//Utopian Tree
+//
+function utopianTree(n) {
+    let height = 1;
+    for(let i=0;i<=n;i++){
+        if(i%2 === 0){
+            height ++;
+        }else{
+            hegiht = height * 2;
+        }
+    }
+    return height;
+}
