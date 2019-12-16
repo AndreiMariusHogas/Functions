@@ -862,3 +862,39 @@ function viralAdvertising(n) {
 }
 viralAdvertising(3);
 viralAdvertising(4);
+
+
+//Save the Prisoner!
+//Check if number of sweets is higher than num of prisoners
+//if higher calculate the remainder of sweets divided by number of prisoners
+//if not calculate start position + swettsNum -1(for the initial sweet give)
+//return place
+//Wrong approach
+//Works for small numbers
+function saveThePrisoner(n, m, s) {
+    let sweetsNum = 0;
+    let prisonerPlace;
+    if(m>n){
+        sweetsNum = m%n;
+        prisonerPlace = s + sweetsNum -1;
+    }else{
+        sweetsNum = m;
+        prisonerPlace = s + sweetsNum -1;
+    }
+    return prisonerPlace + "\n";
+}
+saveThePrisoner(7,19,2);
+saveThePrisoner(3,7,3);
+saveThePrisoner(11,32020900,6);
+
+//Check for the remainder of sweets
+//if the difference + the position = 0//the last prisoner = number of prisoners
+//else the last prisoner is the remainder of the sum of the modulo + position and number of prisoners
+function saveThePrisoner(n,m,s){
+    let difference = m%n;
+    if((difference + s-1) % n === 0){
+        return n;
+    }else{
+        return ((difference+s-1)%n);
+    }
+}
