@@ -816,3 +816,25 @@ function angryProfessor(k, a) {
     }
 
 }
+//Beautiful Days at the Movies
+//Loop from i to j
+//Convert to String. Reverse and convert to Number
+//Calculate the Difference
+//Check if divisible by k 
+//if yes add 1 to beautifulNum
+function beautifulDays(i, j, k) {
+    let beautifulNum = 0;
+    function reverseNum(num){
+        return Number(num.toString().split('').reverse().join(''));
+    }
+    for(let index=i;index<=j;index++){
+        let reverse = reverseNum(index);
+        let difference = Math.abs(index - reverse);
+        if(difference % k === 0){
+            beautifulNum++;
+        }
+    }
+    return beautifulNum;
+}
+
+beautifulDays(20,23,6);
