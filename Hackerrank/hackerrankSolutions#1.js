@@ -779,15 +779,40 @@ function designerPdfViewer(h, word) {
 designerPdfViewer([1,3,1,3,1,4,1,3,2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,7],'zaba');
 
 //Utopian Tree
-//
+//Check Cycle
+//If divisible by 2 add 1
+//if not multiply by 2
+//return result 
 function utopianTree(n) {
     let height = 1;
-    for(let i=0;i<=n;i++){
+    for(let i=1;i<=n;i++){
         if(i%2 === 0){
             height ++;
         }else{
-            hegiht = height * 2;
+            height = height * 2;
         }
     }
     return height;
+}
+
+//Angry Professor
+//Loop through times of arrival
+//Save number of students on time
+//check if higher than K 
+//if yes return no
+//if no return yes
+
+function angryProfessor(k, a) {
+    let studentsOnTime = 0;
+    a.forEach((student) => {
+        if(student <= 0){
+            studentsOnTime++
+        }
+    })
+    if(studentsOnTime >= k){
+        return "NO";
+    }else{
+        return "YES";
+    }
+
 }
