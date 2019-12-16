@@ -838,3 +838,27 @@ function beautifulDays(i, j, k) {
 }
 
 beautifulDays(20,23,6);
+
+//Viral Advertising
+//half of the people like the add
+//They always share with 3 friends
+//Write function that dynamically calculates the number of people it gets shared with
+//Half of those like it
+//Add number to adviews
+//Add number to likes
+//return likes
+function viralAdvertising(n) {
+    let adviews = 5;
+    let likes = 2;
+    function adsNum(num){
+        adviews = Math.floor(num/2) * 3;
+        likes += Math.floor(adviews/2);
+    }
+    for(let i=1;i<n;i++){
+        adsNum(adviews);
+    }
+    return likes;
+
+}
+viralAdvertising(3);
+viralAdvertising(4);
