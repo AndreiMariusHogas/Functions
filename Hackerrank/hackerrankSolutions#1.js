@@ -898,3 +898,37 @@ function saveThePrisoner(n,m,s){
         return ((difference+s-1)%n);
     }
 }
+
+//Circular Array Rotation
+//Check for position after a number of rotations
+//new position of element = query + Remainder of rotations divided by array.length 
+//if new position > array length ?? error
+//Remainder of new position divided by array length again should take care of the case
+//Should work! not sure
+//Works!! 
+function circularArrayRotation(a, k, queries) {
+    let n = a.length;
+    let result = [];
+    queries.forEach(num => {
+        result.push((a[(n + num - (k % n)) % n]));
+    })
+    return result;
+}
+circularArrayRotation([1,2,3],2,[0,1,2])
+
+//Sequence Equation
+
+function permutationEquation(p) {
+    let n = p.length;
+    let results = [];
+
+    
+}
+permutationEquation([2,3,1]);
+
+
+p[i] = 1 = p[3] = p[p[1]];
+p[i] = 2 = p[4] = p[p[0]];
+p[i] = 3 = p[1] = p[p[3]];
+p[i] = 4 = p[5] = p[p[2]];
+p[i] = 5 = p[2] = p[p[4]];
