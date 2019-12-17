@@ -979,3 +979,170 @@ function jumpingOnClouds(c, k) {
     return energy;
 }
 jumpingOnClouds([0,0,1,0,0,1,1,0],2);
+
+//Find Digits
+//convert to string
+//separate into an array of strings
+//convert to numbers
+//check if number is divisible by n 
+//if yes add 1 to count
+//return count
+//Worked like a charm!
+function findDigits(n) {
+    let stringDigits = n.toString().split('');
+    let numbers = [];
+    let count = 0;
+    stringDigits.forEach((string) => numbers.push(Number(string)));
+    numbers.forEach((number)=>{
+        if(n%number === 0){
+            count++;
+        }
+    })
+    return count;
+}
+findDigits(12);
+findDigits(1012);
+findDigits(88);
+
+//Extra Long Factorials
+//Check how to use Big Int 
+//Loop from number to 1
+//Multiply by i
+//return result
+//can loop from n to 2 or 2 to
+//Learned New Method 
+//Works!
+function extraLongFactorials(n) {
+    let factorialize = BigInt(1);
+    for(let i=BigInt(2);i<=n;i++){
+        factorialize *= i;
+    }
+    return console.log(factorialize.toLocaleString('fullwide', { useGrouping: false }));
+}
+extraLongFactorials(25);
+
+//Append and Delete
+//Check if letters are repeated 
+//if not. check for length of word 
+//if they are. check for length -index-i x2 +1
+//Too much chaos
+//Need to Simplify 
+function appendAndDelete(s, t, k) {
+    if(s === t){
+        if(s.length * 2 + 1 === k ){
+            return "Yes";
+        }else{
+            return "No"
+        }
+    }else{
+        let sArr = s.split('');
+        let tArr = t.split('');
+        let n = tArr.length;
+        let m = sArr.length;
+        let indexToBreak = 0;
+        let numMoves = 0;
+        for(let i=0;i<n;i++){
+            if(sArr[i] !== tArr[i]){
+                indexToBreak = i;
+                break;
+            }
+        }
+        console.log(indexToBreak);
+        if(indexToBreak === 0){
+            numMoves = Math.abs(m-n);
+            if(numMoves < k){
+                return "Yes";
+            }else{
+                return "No";
+            }
+        }else{
+            if(n>m){
+                numMoves = Math.abs(m-n)
+                if(numMoves < k === 0 || numMoves % k === 0){
+                    return "Yes"
+                }else{
+                    return "No"
+                }
+            }else{
+                numMoves = n-indexToBreak;
+                if(numMoves * 2+1 === k){
+                    return "Yes";
+                }else{
+                    return "No";
+                }
+            }
+
+        }
+
+    }
+
+}
+appendAndDelete('aba','aba',7);
+appendAndDelete('ash','ashley',2);
+appendAndDelete('zzzz','zzzzzz',4);
+
+//Remade but still 3 cases error
+
+function appendAndDelete(s, t, k) {
+    let sArr = s.split('');
+    let tArr = t.split('');
+    let lengthDiff = 0;
+    let n = s.length;
+    let m = t.length;
+    for(let i=0;i<n;i++){
+        if(sArr[i] === tArr[i]){
+            lengthDiff++
+        }else{
+            break;
+        }
+    }
+    if(n-m>k){
+        return 'No';
+    }else if((n+m-2*lengthDiff)%2 === k%2){
+        if(n===m && k-lengthDiff % 2 !== 0 ){
+            return 'No'
+        }
+        return 'Yes';
+    }else if((n+m-k<0)){
+        return 'Yes';
+    }else{
+        return 'No';
+    }
+    
+}
+appendAndDelete('aba','aba',7);
+appendAndDelete('ash','ashley',2);
+appendAndDelete('zzzz','zzzzzz',4);
+appendAndDelete('qwerasdf','qwerasdf',6);
+appendAndDelete('asdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv','bsdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv',100)
+
+//Remade and Works!
+function appendAndDelete(s,t,k){
+    const sLength = s.length;
+    const tLength = t.length;
+    if(sLength<tLength){
+        if((tLength-sLength)%2 === 0){
+            return "Yes"
+        }else{
+            return "No"
+        }
+    }
+    let commonLength = 0;
+    for(let i=0;i<Math.min(sLength,tLength);i++){
+        if(s.charAt(i) !== t.charAt(i)){
+            break;
+        }
+        commonLength++;
+    }
+    let result  = (tLength-commonLength)+(sLength-commonLength);
+    if(result <=k){
+        return "Yes"
+    }else{
+        return "No"
+    }
+}
+appendAndDelete('aba','aba',7);
+appendAndDelete('ash','ashley',2);
+appendAndDelete('zzzz','zzzzzz',4);
+appendAndDelete('qwerasdf','qwerasdf',6);
+appendAndDelete('asdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv','bsdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv',100)
