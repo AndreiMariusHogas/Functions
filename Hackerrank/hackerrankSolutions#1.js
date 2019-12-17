@@ -1146,3 +1146,41 @@ appendAndDelete('ash','ashley',2);
 appendAndDelete('zzzz','zzzzzz',4);
 appendAndDelete('qwerasdf','qwerasdf',6);
 appendAndDelete('asdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv','bsdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv',100)
+
+//Sherlock and Squares
+//write function to check if is square
+//loop from a to b
+//add 1 to count for each square
+//return count
+//timeout error
+
+function squares(a,b){
+    const isSquare = function(num){
+        return num>0 && Math.sqrt(num) % 1 === 0;
+    }
+    let count=0;
+    for(let i=a;i<=b;i++){
+        if(isSquare(i)){
+            count++;
+        }
+    }
+    return count;
+}
+squares(3,9);
+squares(17,24);
+
+//Calculate the square root of a 
+//square root of b 
+///round them to the nearest int
+//sqrtb-sqrta = result
+//Error on 4 cases 
+//what if a=b?
+//Solved!
+function squares(a,b){
+    return Math.floor(Math.sqrt(b))-Math.ceil(Math.sqrt(a))+1;
+}
+squares(3,9);
+squares(17,24);
+squares(45429427,307805497);
+squares(180,447);
+squares(232,442);
