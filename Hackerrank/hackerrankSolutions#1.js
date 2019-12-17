@@ -917,18 +917,65 @@ function circularArrayRotation(a, k, queries) {
 circularArrayRotation([1,2,3],2,[0,1,2])
 
 //Sequence Equation
-
+//Loop from x=1 to x=n
+//if x === p element indexofelement+1 is the value of p[y]
+//check for value of p[y] in original p array
+//return index of value + 1(count always starts from 0 in array but x starts from 1);
 function permutationEquation(p) {
     let n = p.length;
+    let compare = [];
     let results = [];
-
-    
+    for(let i=1;i<=n;i++){
+        p.forEach((num) => {
+            if(i===num){
+                compare.push(p.indexOf(num) + 1);
+            }
+        })
+    }
+    compare.forEach((comparator)=>{
+        p.forEach((item)=>{
+            if(comparator === item){
+                results.push(p.indexOf(item) + 1);
+            }
+        })
+    })   
+    return results;
 }
 permutationEquation([2,3,1]);
+permutationEquation([4,3,5,1,2]);
+
+x = 1 = p[3] = p[2];
+x = 2 = p[1] = p[3];
+x = 3 = p[2] = p[1];
 
 
-p[i] = 1 = p[3] = p[p[1]];
-p[i] = 2 = p[4] = p[p[0]];
-p[i] = 3 = p[1] = p[p[3]];
-p[i] = 4 = p[5] = p[p[2]];
-p[i] = 5 = p[2] = p[p[4]];
+x=1=p[4]=p[1];
+x=2=p[5]=p[3];
+x=3=p[2]=p[5];
+x=4=p[1]=p[4];
+x=5=p[3]=p[2];
+
+//Jumping on the Clouds: Revisited
+//Loop through array from 
+//increase by k each time 
+//Oops!infinite loop!! NO biggie
+//Check if i%k =0;
+//if/else -3 -1
+//he doesn't spend energy for last one because circle
+//add 1 after the loop
+function jumpingOnClouds(c, k) {
+    let n=c.length;
+    let energy = 100;
+    for(let i=0;i<=n;i++){
+        if(i%k === 0){
+            if(c[i] === 1){
+                energy = energy-3;
+            }else{
+                energy--;
+            }
+        }
+    }
+    energy++;
+    return energy;
+}
+jumpingOnClouds([0,0,1,0,0,1,1,0],2);
