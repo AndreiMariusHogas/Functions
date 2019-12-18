@@ -141,3 +141,44 @@ function repeatedString(s, n) {
 }
 repeatedString('aba',3)
 repeatedString('a',100000);
+
+//Jumping on the Clouds
+//loop through clouds
+//check index of "1" and store it in index array
+//store if speed was changed - initial set to false
+//if step<2 changePace = true add 1
+//if ChangePace add 1 and set it back to false
+//return numbers of jumps + toAdd/2(because you add 1 every time you change pace(2 cases)so 1x2=2)
+
+
+function jumpingOnClouds(c) {
+    let indexToDodge = [];
+    let jumps = Math.floor(c.length/2);
+    let changePace = false;
+    let toAdd = 0;
+    for(let i=0;i<c.length;i++){
+        if(c[i] === 1){
+            indexToDodge.push(i);
+        }
+    }
+    indexToDodge.forEach((index)=>{
+        if(!changePace && index%2 === 0){
+            toAdd++;
+            changePace = true;
+        }else if(changePace && index%2 === 1){
+            toAdd++;
+            changePace = false;
+        }
+    })
+    
+    return jumps+Math.floor(toAdd/2);
+}
+jumpingOnClouds([0,0,0,1,0,0]);
+jumpingOnClouds([0,0,1,0,0,1,0]);
+jumpingOnClouds([0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+     1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1,
+    0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0 ,0]);
+jumpingOnClouds([0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0,
+     0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0,
+      1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0])
