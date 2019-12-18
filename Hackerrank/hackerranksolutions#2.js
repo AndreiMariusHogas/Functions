@@ -53,3 +53,42 @@ function cutTheSticks(arr) {
 cutTheSticks([1,2,3,4,3,3,2,1]);
 
 //Non-divisible Subset
+//Map remainders of el/k
+//loop through remainders and add them
+function nonDivisibleSubset(k, s) {
+    let newArr = s.map((el) => el%k);
+    let combos = [];
+    let solutions = []
+    function addUpIndivisible(arr) { 
+        for (let i = 0; i < arr.length;i++) {
+            for (let e = i + 1; e < arr.length; e++) {
+            
+                combos.push(arr[i] + arr[e]);
+                
+                
+            }   
+        }    
+    } 
+    addUpIndivisible(newArr);
+    function modK(arr) {
+      
+        for(let g= 0; g<arr.length; g++) {
+            
+           
+           if(arr[g] % k == 0){
+               
+               solutions.push(arr[g]);
+               
+           } 
+             
+            
+        }        
+        
+        
+    }
+    modK(combos);
+    console.log(combos);
+    console.log(solutions);
+}
+nonDivisibleSubset(4,[19,10,12,10,24,25,22]);
+nonDivisibleSubset(3,[1,7,2,4]);
