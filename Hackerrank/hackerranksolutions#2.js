@@ -54,41 +54,90 @@ cutTheSticks([1,2,3,4,3,3,2,1]);
 
 //Non-divisible Subset
 //Map remainders of el/k
-//loop through remainders and add them
+//loop through remainders and check if 0 value is present
+//if yes add 1 to count because there can only be 1 element with remainder 0 in the non div subset
+//loop from 1 to k
+//save elements value if k = 4 elem1=1 elem2=3/ elem1 =2 elem2 =2
+//loop through remainders 
+//check if remainder = value 1 or value 2 //add 1 to count for each value found
+//add value of new count to the count depending on which value is more present
+//return count
 function nonDivisibleSubset(k, s) {
-    let newArr = s.map((el) => el%k);
-    let combos = [];
-    let solutions = []
-    function addUpIndivisible(arr) { 
-        for (let i = 0; i < arr.length;i++) {
-            for (let e = i + 1; e < arr.length; e++) {
-            
-                combos.push(arr[i] + arr[e]);
-                
-                
-            }   
-        }    
-    } 
-    addUpIndivisible(newArr);
-    function modK(arr) {
-      
-        for(let g= 0; g<arr.length; g++) {
-            
-           
-           if(arr[g] % k == 0){
-               
-               solutions.push(arr[g]);
-               
-           } 
-             
-            
-        }        
-        
-        
+    if(k===1){
+        return 1;
     }
-    modK(combos);
-    console.log(combos);
-    console.log(solutions);
+    let count = 0;
+    let hasDiv = false;
+    let rem = s.map((element) => element%k)
+    rem.forEach((value)=> {
+        if(value === 0){
+            hasDiv = true;
+        }
+    })
+    if(hasDiv){
+        count++;
+    }
+    for(let i=1;i<=k;i++){
+        const elem1 = i;
+        const elem2 = k-i;
+        let num1C=0;
+        let num2C=0;
+        if(elem1>elem2){
+            break;
+        }
+        for(let j=0;j<rem.length;j++){
+            if(elem1 === rem[j]){
+                num1C++;
+            }
+            if(elem2 === rem[j]){
+                num2C++;
+            }
+        }
+        if(num1C>0&&elem1===elem2){
+            count ++;
+            break;
+        }else{
+            if(num1C>num2C){
+                count+=num1C;
+            }else{
+                count+=num2C;
+            }
+        }
+    }
+    return count;
+    
 }
 nonDivisibleSubset(4,[19,10,12,10,24,25,22]);
 nonDivisibleSubset(3,[1,7,2,4]);
+nonDivisibleSubset(7,[278, 576, 496, 727, 410, 124, 338, 149, 209, 702, 282, 718, 771, 575, 436])
+
+//Repeated String
+//check for n/string.length
+//check for remainder of n%string.length
+//check how many times it repeats in string
+//multiply by n/string length
+//check how many times it repeats from 0 to remainder of n%string.length
+//add to result
+//return result
+//Error on case n<s.length
+//Slice arr from 0 to n if n< slength
+//Solved!
+function repeatedString(s, n) {
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    let stringArr = s.split('');
+    let sLength = s.length;
+    if(n<=sLength){
+        return howMany(stringArr.slice(0,n),'a');
+    }else{
+        let multiplier = Math.floor(n/sLength);
+        let remainder = n%sLength;
+        return (howMany(stringArr,'a')*multiplier)+howMany(stringArr.slice(0,remainder),'a');
+    }
+
+}
+repeatedString('aba',3)
+repeatedString('a',100000);
