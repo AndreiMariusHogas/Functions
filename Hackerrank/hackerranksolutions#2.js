@@ -182,3 +182,24 @@ jumpingOnClouds([0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 
      0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0,
       1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
     0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0])
+
+
+//Equalize The Array
+//check howMany of each element is in the array
+//store maxvalue
+//arr.length -maxvalue = equalized
+//Worked first try
+function equalizeArray(arr) {
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    let maxValue=0;
+    arr.forEach((element)=>{
+        if(howMany(arr,element)>=maxValue){
+            maxValue = howMany(arr,element);
+        }
+    })
+    return arr.length-maxValue;
+}
