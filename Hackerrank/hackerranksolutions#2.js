@@ -203,3 +203,93 @@ function equalizeArray(arr) {
     })
     return arr.length-maxValue;
 }
+
+//ACM ICPC Team
+//Loop Through Topics 
+//Save known subj for each participant
+//check for maximum subj 
+//remove duplicates from pairs arr
+//check max length of subjects
+//check max length of subjects knows
+//return length of maxknownsubj
+//return pairs.length = maxknownsubj.length
+//Perfect
+function acmTeam(topic) {
+    let topicPos = [];
+    let pairs = [];
+    let finalPairs = [];
+    let maxSubj = [];
+    let maxKnownSubj = 0;
+    let finalPairsKnownSubj = [];
+    let howManyPairs = 0;
+    let result = [];
+    for (let i=0;i<topic[0].length;i++){
+        maxSubj.push(i)
+    }
+    topic.forEach((num) =>{
+        let independentTopic = num.split('');
+        let knownSubj = [];
+        console.log(independentTopic);
+        for(let i=0;i<independentTopic.length;i++){
+            if(Number(independentTopic[i]) === 1){
+                knownSubj.push(i);
+            }
+        }
+        topicPos.push(knownSubj);
+    })
+    for(let i=0;i<topicPos.length;i++){
+        for(let j=i+1;j<topicPos.length;j++){
+            pairs.push(topicPos[i].concat(topicPos[j]).sort((a,b)=>a-b));
+        }
+    }
+    for(let i=0;i<pairs.length;i++){
+        finalPairs.push([...new Set(pairs[i])]);
+    }
+
+    for(let i=0;i<finalPairs.length;i++){
+        finalPairsKnownSubj.push(finalPairs[i].length);
+        if(finalPairs[i].length>maxKnownSubj){
+            maxKnownSubj = finalPairs[i].length;
+        }
+    }
+    finalPairsKnownSubj.forEach((pair)=> {
+        if(pair === maxKnownSubj){
+            howManyPairs++;
+        }
+    })
+    result.push(maxKnownSubj);
+    result.push(howManyPairs);
+    return result;
+}
+
+
+acmTeam(['10101','11100','11010','00101'])
+
+//Simplified to pass timeout errors
+
+function acmTeam(topic) {
+    let people = [];
+    let peopleKnownSubj = [];
+    let pairs = [];
+    let result = [];
+    topic.forEach((subj) => people.push(subj.split('')));
+    people.forEach((person) => {
+        let knownSubj = [];
+        for(let i=0;i<person.length;i++){
+            if(person[i] === '1'){
+                knownSubj.push(i);
+            }
+        }
+        peopleKnownSubj.push(knownSubj);
+    })
+    for(let i=0;i<peopleKnownSubj.length;i++){
+        for(let j=i+1;j<peopleKnownSubj.length;j++){
+            pairs.push([...new Set(peopleKnownSubj[i].concat(peopleKnownSubj[j]))])
+        }
+    }
+    let maxKnown = pairs.reduce((max,pair) => max>pair.length? max:pair.length,0); 
+    let howMany = pairs.filter((pair) => pair.length === maxKnown);
+    result.push(maxKnown,howMany.length);
+    return result;
+}
+acmTeam(['10101','11100','11010','00101'])
