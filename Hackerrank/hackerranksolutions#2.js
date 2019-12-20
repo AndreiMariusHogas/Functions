@@ -293,3 +293,36 @@ function acmTeam(topic) {
     return result;
 }
 acmTeam(['10101','11100','11010','00101'])
+
+
+//2D Array - DS
+-9-9-9 1 1 1
+ 0-9 0 4 3 2
+-9-9-9 1 2 3
+ 0 0 8 6 6 0
+ 0 0 0-2 0 0
+ 0 0 1 2 4 0 
+
+//Solution start from middle  start at index 1 row 1 col  sum = arr[i]
+//Drew Array on a piece of paper
+//realized that if you calculate indexes from the center square you can actually calculate the sum of the hourglass by adding every element around the index 
+//remember to not add the side elements arr[i][i-1] and arr[i][i+1];
+ function hourglassSum(arr) {
+    let sumsArr = [];
+    let n=arr.length;
+    let sum = 0
+    for (let i=1;i<n-1;i++){
+        for(let j=1;j<n-1;j++){
+            sum = arr[i][j]+arr[i-1][j-1]+arr[i-1][j]+arr[i-1][j+1]+arr[i+1][j-1]+arr[i+1][j]+arr[i+1][j+1];
+            sumsArr.push(sum);
+            sum = 0;
+        }
+        
+    }
+    return Math.max(...sumsArr);
+}
+
+hourglassSum([[-9,-9,-9,1,1,1],[0,-9,0,4,3,2],[-9,-9,-9,1,2,3],[0,0,8,6,6,0],[0,0,0,-2,0,0],[0,0,1,2,4,0]]);
+
+
+//Arrays: Left Rotation
