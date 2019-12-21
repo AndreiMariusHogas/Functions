@@ -471,3 +471,87 @@ function minimumSwaps(arr) {
 minimumSwaps([1,3,5,2,4,6,7]);
 minimumSwaps([4,3,1,2]);
 minimumSwaps([2,3,4,1,5]);
+
+//Array Manipulation
+//Check indexes
+//save most common index
+//perform operations on most common index
+//return the result
+function arrayManipulation(n, queries) {
+    let arr=[];
+    let operations = [];
+    let maxSum=0;
+    function extractIndex([a,b,k]){
+        for(let i=a;i<=b;i++){
+            arr.push(i);
+            operations.push([i,k]);
+        }
+    }
+    function howMany(array,value){
+        let count = 0
+        array.forEach((element) => (element === value && count++));
+        return count;
+    }
+    queries.forEach((query) => extractIndex(query));
+    let occurences = 0;
+    let operationsIndex = 0;
+    arr.forEach((element) => {
+        if(howMany(arr,element) > occurences){
+            occurences = howMany(arr,element);
+            operationsIndex = element;
+        }
+    } );
+    function addOperations([num,value]){
+        maxSum+=value;
+    }
+    operations.forEach((pair)=> pair[0] === operationsIndex ? addOperations(pair):0);
+    return maxSum;
+    
+}
+
+arrayManipulation(5,[[1,2,100],[2,5,100],[3,4,100]]);
+arrayManipulation(4,[[2,3,603],[1,1,286],[4,4,882]]);
+//Works but limited due to k > sum of most often index
+//Rework 
+
+function arrayManipulation(n, queries) {
+    let arr=  Array.apply(null,{length:n}).map((elem) => elem = 0);
+    function performOperations([a,b,k]){
+        for(let i=a-1;i<=b-1;i++){
+            arr[i] +=k;
+        }
+    }
+    queries.forEach((query) => performOperations(query));
+    return Math.max(...arr);
+    
+}
+arrayManipulation(5,[[1,2,100],[2,5,100],[3,4,100]]);
+arrayManipulation(4,[[2,3,603],[1,1,286],[4,4,882]]);
+//7 Runtime Error Cases
+
+function arrayManipulation(n,queries){
+    let arr = new Array(n).fill(0);
+    let sumPairs = [];
+    let maxSum = 0;
+    let sum = 0;
+    function performOperations([a,b,k]){
+        sumPairs.push([a,k]);
+        sumPairs.push([b,-k]);
+    }
+    function addUp([element,accumulator]){
+        sum += accumulator;
+        if(sum>maxSum){
+            maxSum = sum;
+        }
+    }
+    queries.forEach(query => performOperations(query));
+    sumPairs.sort(([a,b],[c,d]) => a-c === 0 ? d-b: a-c);
+    sumPairs.forEach(pair => addUp(pair));
+
+    return maxSum;
+    
+}
+arrayManipulation(5,[[1,2,100],[2,5,100],[3,4,100]]);
+arrayManipulation(4,[[2,3,603],[1,1,286],[4,4,882]]);
+arrayManipulation(10,[[1,5,3],[4,8,7],[6,9,1]]);
+arrayManipulation(10,[[2,6,8],[3,5,7],[1,8,1],[5,9,15]]);
