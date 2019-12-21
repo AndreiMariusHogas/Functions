@@ -359,21 +359,60 @@ rotLeft([1,2,3,4,5],2);
 //if number of bribes > 2
 //too chaotic
 //else add to bribes
+//Timeout on 4 cases
 function minimumBribes(q) {
     let n=q.length;
     let bribes = 0;
+    let firstSwap = 0;
     for(let i=0;i<n;i++){
-        if(q[i]-i>3){
-            console.log('Too Chaotic');
+        if(q[i]>i+1){
+            firstSwap = q[i];
+            break;
+        }
+    }
+    let swappedArr = q.filter((elem) => elem >= firstSwap);
+    function extractIndex(num) {
+        return q.indexOf(num);
+    }
+    let isChaotic = swappedArr.filter((element) => element-(extractIndex(element)+1) > 2);
+    let m = isChaotic.length;
+    if(m>0){
+        console.log('Too chaotic');
+    }else{
+        swappedArr.forEach((element) => {
+            let temp = q.slice(extractIndex(element),n);
+            let diff = temp.filter((val) => val < element);
+            bribes += diff.length;
+        })
+        return bribes;
+    }
+    
+}
+minimumBribes([2,1,5,3,4]);
+minimumBribes([2,5,1,3,4]);
+minimumBribes([1,2,5,3,7,8,6,4]);
+//Timeout on 4 cases
+//Need to simplify
+function minimumBribes(q) {
+    const n=q.length;
+    let bribes = 0;
+    for(let i=0;i<n;i++){
+        const pos =q[i]
+        let initVal = i+1;
+        if(pos - initVal > 2){
+            console.log('Too chaotic');
             return;
         }
-        let arrAfter = q.slice(i,n);
-        let eleDiff = arrAfter.filter((ele) => ele < q[i]);
-        bribes += eleDiff.length;
+        for(j=pos-2;j<i;j++){
+            if(pos < q[j]){
+                bribes++;
+            }
+        }
     }
-    console.log(bribes);
+    console.log(bribes)
     return;
 }
+
 minimumBribes([2,1,5,3,4]);
 minimumBribes([2,5,1,3,4]);
 minimumBribes([1,2,5,3,7,8,6,4]);
