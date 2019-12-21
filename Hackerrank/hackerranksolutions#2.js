@@ -403,16 +403,71 @@ function minimumBribes(q) {
             console.log('Too chaotic');
             return;
         }
-        for(j=pos-2;j<i;j++){
+        for(let j=pos-2;j<i;j++){
             if(pos < q[j]){
                 bribes++;
             }
         }
     }
-    console.log(bribes)
+    console.log(bribes);
     return;
 }
 
 minimumBribes([2,1,5,3,4]);
 minimumBribes([2,5,1,3,4]);
 minimumBribes([1,2,5,3,7,8,6,4]);
+
+///Minimum Swaps 2
+//check for element value. If element value != index+1
+//element value = index + 1, swap to index of index+1;
+
+function minimumSwaps(arr) {
+    let n=arr.length;
+    let swaps =0;
+    for(let i=n-1;i>=0;i--){
+        for(let j=i-1;j>=0;j--){
+            if(arr[i]<arr[j]){
+                arr[j] = arr[i];
+                swaps++
+            }
+        }
+    }
+    return swaps;
+}
+
+
+//Timeout Error on 3 cases;
+//Need to research
+function minimumSwaps(arr) {
+    let n=arr.length;
+    let temp = [];
+    let seen = [];
+    let swaps = 0;
+    for(let i=0;i<n;i++){
+        temp[i]=[];
+        temp[i].value = arr[i];
+        temp[i].key = i;
+        seen[i]=false;
+    }
+    temp.sort((a,b)=>a.value-b.value);
+    for(let i=0;i<n;i++){
+        if(temp[i].key === i || seen[i]){
+            continue;
+        }
+        let cycle = 0;
+        let j=i;
+        while(!seen[j]){
+            seen[j]= true;
+            j=temp[j].key;
+            cycle++;
+        }
+        if(cycle>0){
+            swaps+= (cycle>1)?cycle-1:cycle;
+        }
+    }
+    return swaps;
+    
+}
+minimumSwaps([1,3,5,2,4,6,7]);
+minimumSwaps([4,3,1,2]);
+minimumSwaps([2,3,4,1,5]);
