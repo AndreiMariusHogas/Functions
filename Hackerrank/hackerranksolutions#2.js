@@ -326,3 +326,54 @@ hourglassSum([[-9,-9,-9,1,1,1],[0,-9,0,4,3,2],[-9,-9,-9,1,2,3],[0,0,8,6,6,0],[0,
 
 
 //Arrays: Left Rotation
+//check if number of rotations is bigger than array length
+//if yes rot-arr.length
+//loop through array. 
+//add rot to index 
+//return index
+
+function rotLeft(a, d) {
+    let n=a.length;
+    let rotations = d;
+    let result= [];
+    if(d>n){
+        rotations = d-n;
+    }
+    for (let i=0;i<n;i++){
+        if(i+d>=n){
+            result.push(a[Math.abs(n-(i+d))]);
+        }else{
+            result.push(a[i+d]);
+        }
+    }
+    return result;
+}
+
+rotLeft([1,2,3,4,5],2);
+
+
+//New Year Chaos
+//Loop through 
+//check if number is bigger than index+1
+//if yes check number of bribes to original place
+//if number of bribes > 2
+//too chaotic
+//else add to bribes
+function minimumBribes(q) {
+    let n=q.length;
+    let bribes = 0;
+    for(let i=0;i<n;i++){
+        if(q[i]-i>3){
+            console.log('Too Chaotic');
+            return;
+        }
+        let arrAfter = q.slice(i,n);
+        let eleDiff = arrAfter.filter((ele) => ele < q[i]);
+        bribes += eleDiff.length;
+    }
+    console.log(bribes);
+    return;
+}
+minimumBribes([2,1,5,3,4]);
+minimumBribes([2,5,1,3,4]);
+minimumBribes([1,2,5,3,7,8,6,4]);
