@@ -555,3 +555,94 @@ arrayManipulation(5,[[1,2,100],[2,5,100],[3,4,100]]);
 arrayManipulation(4,[[2,3,603],[1,1,286],[4,4,882]]);
 arrayManipulation(10,[[1,5,3],[4,8,7],[6,9,1]]);
 arrayManipulation(10,[[2,6,8],[3,5,7],[1,8,1],[5,9,15]]);
+
+///Hash Tables: Ransom Note
+//split ransom note into words
+//check if magazine includes ransom words
+//return yes if magazine includes all the words
+//error. check if word repeats
+//timeout error
+function checkMagazine(magazine, note) {
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    for(let i=0;i<note.length;i++){
+        if(howMany(magazine,note[i]) !== howMany(note,note[i]) && howMany(magazine,note[i]) < howMany(note,note[i])){
+            console.log('No');
+            return;
+        }
+    }
+    return "Yes";
+}
+
+
+checkMagazine(['two','times','three','is','not','four'],['two','times','two','is','four']);
+
+function checkMagazine(magazine, note) {
+    let noteStr = note.join(' ');
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    let newMag = magazine.filter((words) => noteStr.includes(words));
+    let uniqueNote = [...new Set(note)];
+    for(let i=0;i<uniqueNote.length;i++){
+        if(howMany(note,uniqueNote[i]) !== howMany(newMag,uniqueNote[i]) && howMany(note,uniqueNote[i]) > howMany(newMag,uniqueNote[i])){
+            console.log('No');
+            return;
+        }
+    }
+    console.log("Yes");
+    return;
+}
+
+
+checkMagazine(['two','times','three','is','not','four'],['two','times','two','is','four']);
+//Simplify Loop
+function checkMagazine(magazine, note) {
+    let l1 = note.length;
+    let l2 = magazine.length;
+    let count = 0;
+    magazine.sort();
+    note.sort();
+    for(let i=0;i<l1;i++){
+        for(let j=i;j<l2;j++){
+            if(note[i] === magazine[j]){
+                count++;
+                i++;
+            }
+        }
+    }
+    if(count == l1){
+        console.log('Yes');
+        return;
+    }else{
+        console.log('No');
+        return;
+    }
+}
+
+checkMagazine(['two','times','three','is','not','four'],['two','times','two','is','four']);
+//Solved
+
+
+//Two Strings
+//Split first string into letters
+//loop through letters
+//check if s2. includes letters
+//return YES if condition checks
+//return No after loop ends
+function twoStrings(s1, s2) {
+    let sentence1 = s1.split('');
+    for(let i=0;i<sentence1.length;i++){
+        if(s2.includes(sentence1[i])){
+            console.log('YES');
+            return
+        }
+    }
+    console.log('NO');
+    return;
+}
