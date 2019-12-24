@@ -646,3 +646,45 @@ function twoStrings(s1, s2) {
     console.log('NO');
     return;
 }
+
+
+//Strings Making Anagrams
+//split strings into array
+//filter common values
+//check the lowest repeat times for each unique element
+//add the lowest repeat to anagram length
+//deduct anagram length from length of both strings
+
+function makeAnagram(a, b) {
+    let stringA = a.split('');
+    let stringB = b.split('');
+    let versionA = (stringA.filter((x) => stringB.includes(x)).sort());
+    let versionB = (stringB.filter((x) => stringA.includes(x)).sort());
+    function checkAnagram(a,b){
+        if(a.length<b.length){
+            return a
+        }else{
+            return b
+        }
+    }
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    let toCheck = [...new Set(versionA)];
+    let anagram = 0;
+    for(let i=0;i<toCheck.length;i++){
+        if(howMany(versionA,toCheck[i])<howMany(versionB,toCheck[i])){
+            anagram += howMany(versionA,toCheck[i]);
+        }else{
+            anagram += howMany(versionB,toCheck[i]);
+        }
+    }
+    let result = (stringA.length-anagram)+(stringB.length-anagram);
+    return result;
+    
+}
+
+makeAnagram('bugexikjevtubidpulaelsbcqlupwetzyzdvjphn','lajoipfecfinxjspxmevqxuqyalhrsxcvgsdxxkacspbchrbvvwnvsdtsrdk')
+makeAnagram('fsqoiaidfaukvngpsugszsnseskicpejjvytviya','ksmfgsxamduovigbasjchnoskolfwjhgetnmnkmcphqmpwnrrwtymjtwxget')
