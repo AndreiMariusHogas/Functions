@@ -688,3 +688,32 @@ function makeAnagram(a, b) {
 
 makeAnagram('bugexikjevtubidpulaelsbcqlupwetzyzdvjphn','lajoipfecfinxjspxmevqxuqyalhrsxcvgsdxxkacspbchrbvvwnvsdtsrdk')
 makeAnagram('fsqoiaidfaukvngpsugszsnseskicpejjvytviya','ksmfgsxamduovigbasjchnoskolfwjhgetnmnkmcphqmpwnrrwtymjtwxget')
+
+
+//Alternating Charachters
+//Split string
+//Loop through and check if next char = current char
+//if yes index = nextchar 
+//removal++
+//Error
+//if sets[i] !== sets[j] add 1 to i and stop the continuation of the loop
+function alternatingCharacters(s) {
+    let removals = 0;
+    let sets = s.split('');
+    for(let i=0;i<sets.length;i++){
+        for (let j=i+1;j<sets.length;j++){
+            if(sets[i] === sets[j]){
+                removals++;
+                i=j
+            }else if(sets[i]!==sets[j]){
+                i++
+            }
+        }
+    }
+    return removals
+}
+
+alternatingCharacters('ABABABAB')
+
+//Sherlock and the valid String
+
