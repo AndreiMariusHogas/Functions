@@ -716,4 +716,55 @@ function alternatingCharacters(s) {
 alternatingCharacters('ABABABAB')
 
 //Sherlock and the valid String
+//String is valid if elements appear the same number of times
+//Split string into array
+//create array of unique values
+//check how many times each element occurs
+//else return true
+function isValid(s) {
+    let stringArr = s.split('');
+    let uniqueElements = [...new Set(stringArr)];
+    let occurenceArr = [];
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    uniqueElements.forEach((element) => occurenceArr.push(howMany(stringArr,element)));
+    let maxVal = Math.max(...occurenceArr);
+    let minVal = Math.min(...occurenceArr);
+    if(maxVal-minVal > 1) return 'NO';
+    if(maxVal!==minVal){
+        if(howMany(occurenceArr,maxVal) > howMany(occurenceArr,minVal)){
+            if(howMany(occurenceArr,minVal) > 1){
+                return 'NO'
+            }
+        }else{
+            if(howMany(occurenceArr,maxVal) > 1){
+                return 'NO'
+            }
+        }
+    }
+    return 'YES'
+}
+isValid('aaaabbcc')
+//to review
 
+//Beautiful Binary String
+//Alice can change 1 to create beautiful .
+//check minimum moves to obtain beautiful string
+//A string is beautiful if it doesn't contain 010
+//count how mnay times 010 is present 
+//1 change per presence should take care of the beautiful string
+//output count
+//Solved
+
+function beautifulBinaryString(b) {
+    let count = (b.match(/010/g) || {}).length;
+    if(count){
+        return count;
+    }else{
+        return 0;
+    }
+}
+beautifulBinaryString('0101010')
