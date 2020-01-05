@@ -115,3 +115,27 @@ function mostNumbers(numbers){
 
 mostNumbers(1, 2, 3);
 mostNumbers(5, -5);
+
+//Count Inversion 
+function countInversion(sequence){
+    let inversions = 0;
+    const n = sequence.length;
+    sequence.forEach((element) => {
+        let temp = sequence.slice(sequence.indexOf(element)).filter((x) => x < element);
+        inversions += temp.length;
+    })
+    return inversions;
+}
+countInversion([1, 2, 5, 3, 4, 7, 6])
+
+//Most Frequent
+function mostFrequent(data){
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    const freqArr = data.map((x)=>howMany(data,x));
+    return data[freqArr.indexOf(Math.max(...freqArr))];
+}
+mostFrequent(['a', 'a', 'bi', 'bi', 'bi'])
