@@ -138,4 +138,19 @@ function mostFrequent(data){
     const freqArr = data.map((x)=>howMany(data,x));
     return data[freqArr.indexOf(Math.max(...freqArr))];
 }
-mostFrequent(['a', 'a', 'bi', 'bi', 'bi'])
+mostFrequent(['a', 'a', 'bi', 'bi', 'bi']);
+
+//Three Words
+function threeWords(data){
+    const dataArr = data.split(' ');
+    let count = 0;
+    for(let i=0;i<dataArr.length;i++){
+        console.log(typeof(dataArr[i]));
+        if(count === 3){
+            return true
+        }
+    }
+    return false;
+}
+threeWords("Hello World hello")
+threeWords("He is 123 man")

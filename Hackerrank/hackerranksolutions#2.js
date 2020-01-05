@@ -789,4 +789,30 @@ function fizzBuzz(n){
 fizzBuzz(15);
 
 
-//
+//Mars Exploration
+//String length is always a multiple of 3 
+//write a compare function
+//extract letters changed by mapping over
+//reduce it to a sum
+
+function marsExploration(s) {
+    const message = s.match(/.{1,3}/g);
+    function compareBits(text){
+        if(text === 'SOS'){
+            return 0;
+        }else{
+            let changed = 0;
+            text.charAt(0) !== 'S' ? changed++: 0;
+            text.charAt(1) !== 'O' ? changed++: 0;
+            text.charAt(2) !== 'S' ? changed++: 0;
+            return changed;
+        }
+
+    }
+    let results = message.map((x) => compareBits(x));
+    return results.reduce((sum,x)=>sum += x)
+
+}
+
+marsExploration('SOSSOT');
+marsExploration('SOSSPSSQSSOR');
