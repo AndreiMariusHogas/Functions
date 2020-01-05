@@ -100,24 +100,18 @@ commonWords("one,two,three", "four,five,six");
 commonWords("one,two,three", "four,five,one,two,six,three")
 
 
-//Difference between smallest and largest in an array
+//Difference between smallest and largest float in an array
 function mostNumbers(numbers){
-    let high = 0;
-    let low = 0;
-    if(!numbers){
+    const numArr = [...arguments];
+    const n = numArr.length;
+    numArr.sort((a,b) => a-b);
+    console.log(numArr);
+    if(numArr.length === 0){
         return 0;
+    }else{
+        return numArr[n-1]-numArr[0];
     }
-    else{
-        console.log(numbers.toString());
-        console.log(numbers);
-        }
-    }
+}
 
 mostNumbers(1, 2, 3);
 mostNumbers(5, -5);
-
-
-
-
-
-mostNumbers(5, -5)

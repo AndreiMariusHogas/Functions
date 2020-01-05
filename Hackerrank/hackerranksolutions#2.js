@@ -768,3 +768,25 @@ function beautifulBinaryString(b) {
     }
 }
 beautifulBinaryString('0101010')
+
+
+function fizzBuzz(n){
+    let newArr = [...Array(n).keys()].map((x)=> ++x);
+    let fizzBuzzArr = newArr.map((elem) => {
+        if(elem % 3 === 0 && elem % 5 === 0){
+            return 'FizzBuzz';
+        }else if(elem % 3 === 0){
+            return 'Fizz';
+        }else if(elem % 5 === 0){
+            return 'Buzz';
+        }else{
+            return elem;
+        }
+    })
+    return console.log(fizzBuzzArr.join('\n'))
+
+}
+fizzBuzz(15);
+
+
+//
