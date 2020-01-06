@@ -145,7 +145,36 @@ function threeWords(data){
     const dataArr = data.split(' ');
     let count = 0;
     let convertedData = dataArr.map((x) => Number(x));
-    console.log(convertedData)
+    for(let i=0;i<convertedData.length;i++){
+    if(Number(convertedData[i]) !== convertedData[i]){
+        count++;
+    }else{
+        count = 0;
+    }
+    if(count === 3){
+        return true;
+    }
+    }
+    return false;
 }
-threeWords("Hello World hello")
-threeWords("He is 123 man")
+threeWords("Hello World hello");
+threeWords("He is 123 man");
+
+//BiggerPrice
+function biggerPrice(limit, data) {
+    let sortedData = data.sort((a,b) => b.price - a.price);
+    let result = [];
+    let i=0;
+    while(result.length < limit){
+        result.push(sortedData[i]);
+        i++;
+    }
+    return result;    
+}
+
+biggerPrice(2, [
+    {"name": "bread", "price": 100},
+    {"name": "wine", "price": 138},
+    {"name": "meat", "price": 15},
+    {"name": "water", "price": 1}
+]);
