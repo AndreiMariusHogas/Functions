@@ -178,3 +178,9 @@ biggerPrice(2, [
     {"name": "meat", "price": 15},
     {"name": "water", "price": 1}
 ]);
+
+//First Word Simplified
+function firstWord(a, b) {
+    return a.split(' ')[0];
+}
+firstWord("Hello world");
