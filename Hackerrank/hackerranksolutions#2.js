@@ -1024,10 +1024,11 @@ kaprekarNumbers(1,9999);
 //Beautiful Triplets
 //is Beautiful if i<j<k && a[j]-a[i] = a[k] - a[j] = d
 //Write function to check if beautiful
-//check for x-prev value =  next-value-x
+//check for x-prev value =  next-value-x = d
 //if true return 1
 //else return 0
-//reduce the array
+//map the array with the isBeautiful function
+//reduce the array to the sum of its elements
 
 
 function beautifulTriplets(d, arr) {
@@ -1046,3 +1047,38 @@ function beautifulTriplets(d, arr) {
 
 beautifulTriplets(3,[1,2,3,4,5,7,8,10])
 beautifulTriplets(3,[1,6,7,7,8,10,12,13,14,19]);
+
+//Minimum Distances
+//Check for duplicates in arr
+//if no duplicates console.log(-1);
+//if there are duplicates calculate the smallest distance between the 2
+//write function to check if duplicates( if secondIndex != -1) add to duplicate array
+//write function to calculate difference
+//map the duplicates arr with the index differences
+//return min value of the arr
+function minimumDistances(a) {
+    let duplicatesArr = [];
+    function checkDuplicates(num,arr){
+        let firstIndex = arr.indexOf(num);
+        let secondIndex = arr.indexOf(num,(firstIndex + 1));
+        if(secondIndex !== -1){
+            duplicatesArr.push(num);
+        }
+    }
+    function indexDifference(number,array){
+        let firstIndex = array.indexOf(number);
+        let secondIndex = array.indexOf(number,(firstIndex + 1));
+        return secondIndex - firstIndex;
+    }
+    let checkArr = [...new Set(a)];
+    checkArr.forEach((x) => checkDuplicates(x,a));
+    if(duplicatesArr.length === 0){
+        return -1;
+    }else{
+        let resultArr = duplicatesArr.map((x) => indexDifference(x,a));
+        return Math.min(...resultArr);
+    }
+}
+minimumDistances([7,1,3,4,1,7]);
+minimumDistances([1,2,3,4,5,6,7]);
+//Works!
