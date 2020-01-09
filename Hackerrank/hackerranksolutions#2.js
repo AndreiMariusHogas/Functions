@@ -865,3 +865,80 @@ taumBday(742407782,90529439,847666641,8651519,821801924)
 //Works!!! Use BigInt to convert the initial values // Write the logic to solve the problem
 //To remember BigInt usage
 
+
+//Organizing Containers of Balls
+//Check size of container
+//Check number of balls
+//Loop through containers and save the sum of each type of balls
+//Sort them and compare them 
+//If any 2 pair at the same index are not equal the sort is not possible
+//else is possible 
+function organizingContainers(container) {
+    let containersArr=[];
+    let ballsArr = [];
+
+    for(let i=0;i<container.length;i++){
+        for(let j=0;j<container[i].length;j++){
+            if(i===0){
+                ballsArr.push(container[i][j]);
+            }else{
+                ballsArr[j] += container[i][j];
+            }
+            if(j===0){
+                containersArr.push(container[i][j]);
+            }else{
+                containersArr[i] += container[i][j];
+            }
+        }
+    }
+    containersArr.sort((a,b) => a-b);
+    ballsArr.sort((a,b) => a-b);
+    for(let i=0;i<ballsArr.length;i++){
+        if(ballsArr[i] !== containersArr[i]) return 'Impossible';
+    }
+    return 'Possible';
+}
+organizingContainers([[1,3,1],[2,1,2],[3,3,3]]);
+
+
+//Encryption
+//Encryption Scheme L=length of text
+//math.floor(math.sqrt(L))<=row<=col<math.ceil(math.sqrt(L));
+//Remove spaces and calculate Length
+//Calculate math ceil and math floor of the square root of length
+//Calculate the grid//Keep in Mind H*W >= L
+//Build the new grid from string
+//loop through columns and add the exisiting charachters to a new string
+//return the string
+function encryption(s) {
+    let strArr = s.split(' ').join('');
+    let n=strArr.length;
+    function extractGrid(num){
+        let rows = Math.floor(Math.sqrt(num));
+        let cols = Math.ceil(Math.sqrt(num));
+        for(let i=rows;i<=cols;i++){
+            if(i * cols >= num){
+                return [i,cols];
+            }
+        }
+    }
+    let grid = extractGrid(n);
+    function buildGrid(string){
+        return string.match(new RegExp('.{1,' + grid[1] + '}', 'g'));
+    }
+    let stringGrid = buildGrid(s);
+    let encryptedMessage = '';
+    for(let i=0;i<stringGrid[0].length;i++){
+        for(let j=0;j<stringGrid.length;j++){
+            if(stringGrid[j].charAt(i) !== ''){
+                encryptedMessage += stringGrid[j].charAt(i);
+            }
+        }
+        encryptedMessage += ' ';
+    }
+    return encryptedMessage.trim();
+}
+encryption('chillout');
+encryption('haveaniceday');
+encryption('feedthedog');
+//Works!
