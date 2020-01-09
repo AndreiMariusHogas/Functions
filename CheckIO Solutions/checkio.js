@@ -184,3 +184,12 @@ function firstWord(a, b) {
     return a.split(' ')[0];
 }
 firstWord("Hello world");
+
+
+//First Word 
+function firstWord(a, b) {
+    let results = a.split(' ');
+    return results[0];
+}
+firstWord("Hello world");
+firstWord("greetings, friends")

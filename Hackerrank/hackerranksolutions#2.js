@@ -816,3 +816,52 @@ function marsExploration(s) {
 
 marsExploration('SOSSOT');
 marsExploration('SOSSPSSQSSOR');
+
+//Taum And B'day
+//input  b=black gifts w=white gifts bc=black gifts price wc=white gift price z=conversion 
+//Check conversion price
+//Compare conversion price
+//if bc>wc+z buy wc and convert them 
+//if wc>bc+z buy bc and convert them 
+//if they are equal buy gifts at the regular price
+function taumBday(b, w, bc, wc, z) {
+    let result = 0;
+    b=BigInt(b);
+    w=BigInt(w);
+    bc=BigInt(bc);
+    wc=BigInt(wc);
+    z=BigInt(z);
+    function compareValues(value1, value2, convertor){
+        if(value1+convertor < value2){
+            return value1;
+        }
+        if(value2+convertor < value1){
+            return value2;
+        }
+        if(value1+convertor >= value2 && value2+convertor >= value1){
+            return 0;
+        }
+    }
+    if(compareValues(bc,wc,z) === 0 ){
+        return result = (b*bc) + (w*wc);
+    }else if(compareValues(bc,wc,z) === bc){
+        return result = (b*bc) + (w*(bc+z));
+    }else if(compareValues(bc,wc,z) === wc){
+        return result = (b*(wc+z) + (w*wc));
+    }
+    
+
+}
+
+taumBday(10,10,1,1,1);
+taumBday(5,9,2,3,4);
+taumBday(3,6,9,1,1);
+taumBday(7,7,4,2,1);
+taumBday(3,3,1,9,2);
+taumBday(742407782,90529439,847666641,8651519,821801924)
+//Error on 3 cases//All BigInt Nums
+//Use BigInt to convert the initial values?
+//Does the solution accept n?at the end or we have to remove it?
+//Works!!! Use BigInt to convert the initial values // Write the logic to solve the problem
+//To remember BigInt usage
+
