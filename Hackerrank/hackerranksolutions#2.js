@@ -982,3 +982,41 @@ biggerIsGreater('bb');
 biggerIsGreater('abcd');
 biggerIsGreater('abdc');
 //Works
+
+
+//Modified Kaprekar Numbers
+//numbers to Array
+//write function to check if number is Kaprekar
+//Calculate num X num 
+//turn to string
+//slice string into 2 pieces
+//add Number(string) 
+//if sum = num return num
+//Map the Array 
+//If Array is empty(invalid Range)
+//If Array is not empty return Array.join(' ');
+function kaprekarNumbers(p, q) {
+    let numArr = Array.from(Array(q).keys()).map((x) => ++x).filter((x)=>x>=p);
+    function isKaprekar(num){
+        let sliceSize = num.toString().length -1;
+        let square = num * num;
+        let squareStr = square.toString();
+        let squareL = squareStr.length;
+        let lastDigits = squareStr.slice(squareL - (1+sliceSize),squareL);
+        let firstDigits = squareStr.slice(0,squareL - (1+sliceSize));
+        if(Number(firstDigits) + Number(lastDigits) === num){
+            return num;
+        }
+    }
+    let kaprekarArr = numArr.filter((x) => isKaprekar(x));
+    if(kaprekarArr.length === 0){
+        return console.log('INVALID RANGE');
+    }else{
+        return console.log(kaprekarArr.join(' '));
+    }
+}
+
+kaprekarNumbers(1,100);
+kaprekarNumbers(100,300);
+kaprekarNumbers(400,700);
+kaprekarNumbers(1,9999);
