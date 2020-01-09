@@ -942,3 +942,43 @@ encryption('chillout');
 encryption('haveaniceday');
 encryption('feedthedog');
 //Works!
+
+//Bigger is Greater
+//Only swap charachters
+//new more > original word
+//smallest word that meets the first condition
+//loop through string from the last element
+//Check for bigger values
+//if no bigger values return no answer
+//else switch values to highest permutation
+function biggerIsGreater(w) {
+    let wordArr = w.split('');
+    const n=wordArr.length;
+    let i = n-1;
+    while(i>0 && wordArr[i-1] >= wordArr[i]){
+        i--;
+    }
+    if(i<=0){
+        return 'no answer';
+    }
+    let j=n-1;
+    while(wordArr[j] <= wordArr[i-1]){
+        j--;
+    }
+    let temp = wordArr[i-1];
+    wordArr[i-1] = wordArr[j];
+    wordArr[j] = temp;
+    j=n-1;
+    while(i<j){
+        temp = wordArr[i];
+        wordArr[i] = wordArr[j];
+        wordArr[j] = temp;
+        i++;
+        j--;
+    }
+    return wordArr.join('');
+}
+biggerIsGreater('bb');
+biggerIsGreater('abcd');
+biggerIsGreater('abdc');
+//Works
