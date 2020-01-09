@@ -1020,3 +1020,29 @@ kaprekarNumbers(1,100);
 kaprekarNumbers(100,300);
 kaprekarNumbers(400,700);
 kaprekarNumbers(1,9999);
+
+//Beautiful Triplets
+//is Beautiful if i<j<k && a[j]-a[i] = a[k] - a[j] = d
+//Write function to check if beautiful
+//check for x-prev value =  next-value-x
+//if true return 1
+//else return 0
+//reduce the array
+
+
+function beautifulTriplets(d, arr) {
+    function isBeautiful(num, numArr){
+        let temp = numArr.filter((x) => x === num + d || x === num +(d+d));
+        if(temp.length === 2 && temp[0] !== temp[1]){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    let resultArr = arr.map(x=> isBeautiful(x,arr));
+    let result = resultArr.reduce((sum,x) => sum+=x);
+    return result;
+}
+
+beautifulTriplets(3,[1,2,3,4,5,7,8,10])
+beautifulTriplets(3,[1,6,7,7,8,10,12,13,14,19]);
