@@ -1082,3 +1082,48 @@ function minimumDistances(a) {
 minimumDistances([7,1,3,4,1,7]);
 minimumDistances([1,2,3,4,5,6,7]);
 //Works!
+
+//Halloween Sale
+//Video Games Sale 
+//First game = p second game = p-d third = second-d until  m a minimum price
+//Calculate prices until it reaches minim
+//add prices
+//deduct from wallet
+//check how many times minimum fits in the remaining wallet 
+//check number of elements in array plus minimum 
+//Error on case where price-d < m
+//Error on case where price-d +price >s
+function howManyGames(p, d, m, s) {
+    let boughtGames = [];
+    let price = p;
+    let wallet = s;
+    let result = 0;
+    function buyGift(gift,wallet){
+        if(wallet - gift > 0){
+            wallet = wallet - gift;
+            boughtGames.push(gift);
+        }
+    }
+    if(price > s){
+        return 0;
+    }else if((price-d + price ) > s){
+        return 1;
+    }else{
+        if(price-d < m){
+            return result = Math.floor((s-p)/m) + 1;
+        }
+        while(price < wallet && price > m){
+            buyGift(price,wallet);
+            price = price -d;
+        }
+        wallet = s-boughtGames.reduce((sum,x) => sum+=x);
+        let minimumPriceGifts = Math.floor(wallet/m);
+        result = boughtGames.length + minimumPriceGifts;
+        return result;
+    }
+
+}
+howManyGames(20,3,6,85);
+howManyGames(16,2,1,9981);
+howManyGames(1,100,1,9777);
+//Works
