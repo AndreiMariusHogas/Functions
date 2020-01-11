@@ -113,3 +113,32 @@ function fairRations(B) {
 }
 
 fairRations([2,3,4,5,6]);
+
+//Cavity Map 
+//Input is a square matrix of strings
+//if prev <x>next x = X
+//Correction . You need to also look up and down in the array
+//Copy array and split each element
+//Start from 1 and loop through each element
+//Check for borders
+//if bigger than borders replace with X
+//return joined element
+
+function cavityMap(grid) {
+    let gridArr = [...grid];
+    let splitGrid = [];
+    let result = [];
+    gridArr.forEach((x) => splitGrid.push(x.split('')));
+    let n=splitGrid.length
+    for(let i=1;i<n-1;i++){
+        for(let j=1;j<n-1;j++){
+            if(splitGrid[i][j] > splitGrid[i-1][j] && splitGrid[i][j] > splitGrid[i+1][j] && splitGrid[i][j] > splitGrid[i][j+1] && splitGrid[i][j] > splitGrid[i][j-1]){
+                splitGrid[i][j] = 'X';
+            }
+        }
+    }
+    splitGrid.forEach((x) => result.push(x.join('')));
+    return result;
+}
+
+cavityMap(['1112','1912','1892','1234'])
