@@ -1191,3 +1191,26 @@ function timeInWords(h, m) {
 }
 timeInWords(5,47);
 
+//Chocolate Feast
+//n=wallet
+//m=number of wrappers for promotion
+//c=cost of each chocolate
+//15/3 = 5 chocolates
+//5/2 = 2 chocolates
+//2 chocolates + remainder of 5%2 = 3/2 = 1 chocolates
+//1 chocolates + remainder of 3%2 = 2/2 = 1 chocolates
+function chocolateFeast(n, c, m) {
+    let wrappers = Math.floor(n/c);
+    let totalChoc = Math.floor(n/c);
+    while(wrappers >= m){
+        totalChoc += Math.floor(wrappers/m);
+        wrappers = Math.floor(wrappers/m) + wrappers %m;
+    }
+    return totalChoc;
+}
+
+chocolateFeast(10,2,5);
+chocolateFeast(12,4,4);
+chocolateFeast(6,2,2);
+chocolateFeast(7,3,2);
+//Works!
