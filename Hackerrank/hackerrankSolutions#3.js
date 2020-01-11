@@ -274,3 +274,27 @@ function happyLadybugs(b) {
 }
 happyLadybugs('RBY_YBR');
 //Works!
+
+
+//Strange Counter
+//More complicated than it seems
+//Tried to write down result in 1 line
+//Works on 3 cases
+//Remake
+function strangeCounter(t) {
+    let dev = Math.floor(t / 3), m = 1, cm = 0, diff = dev - m, zone, remain
+    while (diff >= 0) {
+        cm += m
+        m = m * 2
+        diff -= m
+    }
+    remain = t - 3 * cm
+    if (remain == 0) {
+        return 1
+    }
+    zone = m * 3
+    return zone - remain + 1
+}
+strangeCounter(4);
+strangeCounter(5);
+strangeCounter(8);
