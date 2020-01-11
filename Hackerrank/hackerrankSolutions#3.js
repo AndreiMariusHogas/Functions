@@ -233,3 +233,44 @@ function gridSearch(G, P) {
     return `NO`;
 }
 //WORKS!
+
+//Happy LadyBugs
+//Check if it's possible to satisfy the condition
+//Each ladybug is happy if next or prev ladybug is the same color
+//split string into an array
+//check if empty spaces
+//check if there is alone elements
+//if no spaces check if string is happy
+//
+
+
+function happyLadybugs(b) {
+    let boardArr = b.split('');
+    let results = [];
+    let occurences = [];
+    function isHappy(bug,index,board){
+        if(bug === board[index-1] || bug === board[index+1]){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+    let bugArr = boardArr.filter((x) => x !== '_');
+    
+    for (let i=0;i<boardArr.length;i++){
+        results.push(isHappy(boardArr[i],i,boardArr));
+        occurences.push(howMany(bugArr,boardArr[i]));
+    }
+    if(b.includes('_') && !occurences.includes(1) || !b.includes('_') && !results.includes(false)){
+        return 'YES';
+    }else{
+        return 'NO';
+    }
+}
+happyLadybugs('RBY_YBR');
+//Works!
