@@ -298,3 +298,29 @@ function strangeCounter(t) {
 strangeCounter(4);
 strangeCounter(5);
 strangeCounter(8);
+
+//Super Reduced String
+//Loop from the end of array
+//check if 2 elements are consecutively the same
+//delete the elements
+//filter the array from empty element
+//if endArr.length = 0 return empty string
+//else return the array.join('');
+function superReducedString(s) {
+    let stringArr  = s.split('');
+    let n=stringArr.length;
+    for(let i=n-1;i>0;i--){
+        if(stringArr[i] === stringArr[i-1]){
+            delete stringArr[i];
+            delete stringArr[i-1];
+        }
+        stringArr = stringArr.filter((x)=> x!== '');
+    }
+    if(stringArr.length === 0){
+        return 'Empty String';
+    }else{
+        return stringArr.join('');
+    }
+}
+superReducedString('baab');
+superReducedString('aaabccddd');
