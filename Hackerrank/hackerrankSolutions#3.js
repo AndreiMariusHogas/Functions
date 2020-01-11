@@ -142,3 +142,25 @@ function cavityMap(grid) {
 }
 
 cavityMap(['1112','1912','1892','1234'])
+
+//Manasa and Stones
+//Find Max possible Number on last stone
+//Max possible number = length-1 * smallest difference
+//Extract Unique 
+//Sort the array ascending
+//return array
+function stones(n, a, b) {
+    let stonesCount = n-1;
+    let results = [];
+    for(let i=stonesCount;i>=0;i--){
+        let lastStone = i * a + (stonesCount - i) * b;
+        results.push(lastStone);
+    }
+    return [...new Set(results)].sort((a,b) => a-b);
+}
+stones(3,1,2);
+stones(4,10,100);
+stones(9,25,59);
+stones(18,28,28);
+stones(58,69,24);
+//Works!
