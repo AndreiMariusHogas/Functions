@@ -87,3 +87,29 @@ flatlandSpaceStations(5,[0,4]);
 flatlandSpaceStations(6,[0,1,2,3,4,5]);
 //Passed the timeout Error
 //Works!
+
+
+//Fair Rations
+//1 bread given + 1 bread to the person in front or back
+//loop through array
+//each time an element is uneven add 1 to it and the next elem
+//add 1 to count
+function fairRations(B) {
+    let count = 0;
+    let sumOfBreads = B.reduce((sum,x) => x+=sum);
+    if(sumOfBreads%2 !==0){
+        return 'NO';
+    }else{
+        for(let i=0;i<B.length;i++){
+            let j=i+1;
+            if(B[i]%2 !== 0){
+                    count++;
+                    B[i]++;
+                    B[j]++;
+            }
+        }
+        return count*2;
+    }
+}
+
+fairRations([2,3,4,5,6]);
