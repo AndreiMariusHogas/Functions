@@ -324,3 +324,15 @@ function superReducedString(s) {
 }
 superReducedString('baab');
 superReducedString('aaabccddd');
+
+//CamelCase
+//Input = one string divided by capital letters
+//use split with a positive lookahead to match the capital letters
+//count the length of the array
+//return the length
+
+function camelcase(s) {
+    let stringArr = s.split(/(?=[A-Z])/);
+    return stringArr.length;
+}
+camelcase('saveChangesInTheEditor')
