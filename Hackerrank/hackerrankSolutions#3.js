@@ -164,3 +164,72 @@ stones(9,25,59);
 stones(18,28,28);
 stones(58,69,24);
 //Works!
+
+//The Grid Search
+//Based on given pattern
+//See if the grid contains the pattern
+//Loop through grid
+//Join digits into strings
+//Check if any strings include the first string of the pattern 
+//if yes note the index and extract the sequence
+//compare sequence to pattern 
+//Return result
+
+function gridSearch(G, P) {
+    let n = G.length;
+    let m = P.length;
+    let possibleMatch = G.filter((x) => x.includes(P[0]));
+    for(let k=0;k<possibleMatch.length;k++){
+        let i=G.indexOf(possibleMatch[k]);
+        let start = G[i].indexOf(P[0]);
+        let end = start + P[0].length;
+        let results = [];
+        for(let j=1;j<m;j++){
+            let temp = G[i+j].slice(start,end);
+            results.push(temp === P[j]);
+        }
+        if(!results.includes(false)){
+            return 'YES';
+        }
+    }
+    return 'NO';
+
+}
+//Timeout Error on 4 cases
+
+gridSearch(['7283455864',
+    '6731158619',
+    '8988242643',
+    '3830589324',
+    '2229505813',
+    '5633845374',
+    '6473530293',
+    '7053106601',
+    '0834282956',
+    '4607924137'],['9505',
+        '3845',
+        '3530'])
+
+
+function gridSearch(G, P) {
+    for(let i = 0; i < G.length - P.length+1; i++){
+        let j = 0;
+
+        while(j < G[i].length - P[0].length+1){
+            j = G[i].indexOf(P[0], j);
+            if(j === -1){ break; }
+
+            for(let k = i+1; k-i < P.length; k++){
+                if(G[k].substring(j,j+P[0].length) !== P[k-i]){
+                    break;
+                }
+                else if(k-i === P.length-1){
+                    return `YES`;
+                }
+            }
+            j++;
+        }
+    }
+    return `NO`;
+}
+//WORKS!
