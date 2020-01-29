@@ -336,3 +336,42 @@ function camelcase(s) {
     return stringArr.length;
 }
 camelcase('saveChangesInTheEditor')
+
+//Two Characthers
+function alternate(s) {
+    function howMany(arr,value){
+        let count = 0
+        arr.forEach((element) => (element === value && count++));
+        return count;
+    }
+
+}
+
+alternate('beabeefeab')
+
+//Closest Numbers
+//Sort Array ascending
+//Find the smallest difference
+//Check which pairs are equal to that
+//add them to new arr
+//return new arr
+function closestNumbers(arr) {
+    let minAbsDif = Math.abs(arr[0]-arr[1]);
+    const n = arr.length;
+    arr.sort((a,b) => a-b);
+    let pairs = [];
+    for(let i=0;i<arr.length-1;i++){
+        if (Math.abs(arr[i]-arr[i+1]) < minAbsDif ){
+            minAbsDif = Math.abs(arr[i]-arr[i+1]);
+        }
+    }
+    for(let i=0;i<arr.length-1;i++){
+        if (Math.abs(arr[i]-arr[i+1]) === minAbsDif){
+            pairs.push(arr[i],arr[i+1]);
+        }
+    }
+    return pairs;
+}
+closestNumbers([5,4,3,2]);
+closestNumbers([-20,-3916237,-357920,-3620601,7374819,-7330761,30,6246457,-6461594,266854,-520,-470]);
+closestNumbers([-20,-3916237,-357920,-3620601,7374819,-7330761,30,6246457,-6461594,266854])
