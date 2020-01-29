@@ -374,4 +374,16 @@ function closestNumbers(arr) {
 }
 closestNumbers([5,4,3,2]);
 closestNumbers([-20,-3916237,-357920,-3620601,7374819,-7330761,30,6246457,-6461594,266854,-520,-470]);
-closestNumbers([-20,-3916237,-357920,-3620601,7374819,-7330761,30,6246457,-6461594,266854])
+closestNumbers([-20,-3916237,-357920,-3620601,7374819,-7330761,30,6246457,-6461594,266854]);
+
+//Find the Median
+//Sort the array
+//Determin middle element = length-1/2 || Math.floor(n/2)
+//return middle element
+function findMedian(arr) {
+    arr.sort((a,b) => a-b);
+    const n =  arr.length;
+    const median = Math.floor(n/2);
+    return arr[median];
+}
+findMedian([0,1,2,4,6,5,3]);
