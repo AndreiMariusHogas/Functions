@@ -437,7 +437,7 @@ findMedian([0, 1, 2, 4, 6, 5, 3]);
 function missingNumbers(arr, brr) {
   function howMany(array, value) {
     let count = 0;
-    arr.forEach(element => element === value && count++);
+    array.forEach(element => element === value && count++);
     return count;
   }
   let n1 = arr.length;
@@ -448,11 +448,37 @@ function missingNumbers(arr, brr) {
   console.log(brr);
 
   let checkArr = [...new Set(brr)];
+  let resultsArr = [];
 
   console.log(checkArr);
+  checkArr.forEach(element => {
+    if (howMany(arr, element) < howMany(brr, element)) {
+      resultsArr.push(element);
+    }
+  });
+  return resultsArr;
 }
 
 missingNumbers(
   [203, 204, 205, 206, 207, 208, 203, 204, 205, 206],
   [203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204]
 );
+
+//Pairs
+//Loop through array
+//Loop through array from i+1
+//check if diff = k
+//add count
+//return count
+
+function pairs(k, arr) {
+  let count = 0;
+  const n = arr.length;
+  arr.sort((a, b) => a - b);
+  arr.forEach(x => {
+    let temp = arr.filter(y => y === x + k);
+    count += temp.length;
+  });
+  return count;
+}
+pairs(2, [1, 5, 4, 3, 2]);
